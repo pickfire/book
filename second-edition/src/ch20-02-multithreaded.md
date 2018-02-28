@@ -969,9 +969,8 @@ send that job down the sending end of the channel. We’re calling `unwrap` on
 `send` for the case that sending fails, which might happen if, for example, we
 stop all of our threads from executing, meaning the receiving end has stopped
 receiving new messages. At the moment, though, we can’t stop our threads
-executing; our threads continue executing as long as the pool exists. The
-reason we use `unwrap`, then, is that we we know the failure case won’t happen
-but the compiler can’t tell that.
+executing; our threads continue executing as long as the pool exists. We use
+`unwrap` since we know the failure case but the compiler can't tell that.
 
 But we’re not quite done yet! In the worker, our closure being passed to
 `thread::spawn` still only *references* the receiving end of the channel.
